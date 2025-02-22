@@ -1,0 +1,17 @@
+<div class="home">
+  <div class="table">
+    <characters-search></characters-search>
+    <characters-table
+      [isLoading]="isLoading()"
+      [list]="charactersList()"
+      [errorMessage]="isError()"
+    ></characters-table>
+    <characters-pagination
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (changePage)="onPageChange($event)"
+    ></characters-pagination>
+  </div>
+  <characters-detail class="detail"></characters-detail>
+</div>
+

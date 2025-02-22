@@ -1,0 +1,52 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Species</th>
+      <th>Type</th>
+      <th>Gender</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of list(); track item.id; let index = $index) {
+      <tr >
+        <td>{{ item.name }}</td>
+        <td>{{ item.status }}</td>
+        <td>{{ item.species }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.gender }}</td>
+        <td>{{ item.created | date: 'dd-MM-yyyy' }}</td>
+        <td>
+          <button>Ver</button>
+        </td>
+      </tr>
+    }
+    @if ( errorMessage() ) {
+      <tr>
+        <td colspan="8" class="text-center">
+          {{ errorMessage() }}
+        </td>
+      </tr>
+    }
+    @if(list().length === 0 && !isLoading()) {
+      <tr>
+        <td colspan="7" class="text-center">
+          No se encontraron resultados
+        </td>
+      </tr>
+    }
+
+    @if (isLoading()) {
+      <tr>
+        <td colspan="7" class="text-center">
+          Buscando...
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
