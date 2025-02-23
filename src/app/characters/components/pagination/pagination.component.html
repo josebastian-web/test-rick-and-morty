@@ -1,15 +1,24 @@
-<nav aria-label="Page navigation">
-  <ul class="pagination">
-    <li class="page-item" [class.disabled]="currentPage() === 1">
-      <a class="page-link" (click)="pageSelect(currentPage() - 1)">
-        Previous
-      </a>
-    </li>
-    <li class="page-item">
-      {{ currentPage() }}
-    </li>
-    <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-      <a class="page-link" (click)="pageSelect(currentPage() + 1)">Next</a>
-    </li>
-  </ul>
-</nav>
+<div class="pagination">
+  <div class="page-item">
+    <button
+      mat-icon-button
+      class="page-link"
+      [disabled]="currentPage() === 1 || isLoading()"
+      (click)="pageSelect(currentPage() - 1)"
+    >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+  </div>
+  <div class="page-item">
+    {{ currentPage() }}
+  </div>
+  <div class="page-item">
+    <button
+      mat-icon-button
+      (click)="pageSelect(currentPage() + 1)"
+      [disabled]="currentPage() === totalPages() || isLoading()"
+    >
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,9 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
+import { CharactersService } from '../../services/characters.service';
+// Component
 import { DetailComponent } from '../../components/detail/detail.component';
 import { TableComponent } from '../../components/table/table.component';
-import { CharactersService } from '../../services/characters.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { SearchComponent } from '../../components/search/search.component';
+import { FavoriteComponent } from '../../components/favorite/favorite.component';
+import { MatCardModule } from '@angular/material/card';
 // Interfaces
 import { Result } from '../../interfaces/characters.interfaces';
 
@@ -15,6 +18,8 @@ import { Result } from '../../interfaces/characters.interfaces';
     TableComponent,
     PaginationComponent,
     SearchComponent,
+    FavoriteComponent,
+    MatCardModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
@@ -28,6 +33,10 @@ export class HomePageComponent {
   currentPage = signal<number>(1);
   totalItems = signal<number>(0);
   totalPages = signal<number>(0);
+  detailCharacter = signal<Result|null>(null);
+  searchName = signal<string>('');
+  searchSpecies = signal<string>('');
+  listFavorite = signal<Result[]>([]);
 
   ngOnInit() {
     this.loadCharacters();
@@ -39,7 +48,11 @@ export class HomePageComponent {
     this.isLoading.set(true);
     this.isError.set(null);
 
-    this.charactersService.getItems(this.currentPage())
+    this.charactersService.getListCharacters(
+      this.currentPage(),
+      this.searchName(),
+      this.searchSpecies()
+    )
     .subscribe({
       next: ( response ) => {
         this.isLoading.set(false);
@@ -61,6 +74,40 @@ export class HomePageComponent {
   onPageChange(page: number) {
     this.currentPage.set(page);
     this.loadCharacters();
+  }
+
+  showDetail(detail: Result|null) {
+    this.detailCharacter.set(detail);
+  }
+
+  searchByName(value: string) {
+    this.searchName.set(value);
+    this.loadCharacters();
+  }
+
+  searchBySpecies(value: string) {
+    this.searchSpecies.set(value);
+    this.loadCharacters();
+  }
+
+  addToFavorite(character: Result) {
+
+    let findCharacter = this.listFavorite().find(fav => fav.id === character.id);
+
+    if (!findCharacter) {
+      this.listFavorite.update(values => {
+        return [...values, character]
+      });
+    }
+  }
+
+  removeFavorite(id: number) {
+
+    this.listFavorite.update(values => {
+      let index = values.findIndex(val => val.id === id);
+      values.splice(index, 1);
+      return [...values];
+    });
   }
 
 

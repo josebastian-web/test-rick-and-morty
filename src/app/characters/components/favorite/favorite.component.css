@@ -1,0 +1,4 @@
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  background-color: #54ca68;
+  color: #ffffff;
+}

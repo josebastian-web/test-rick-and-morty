@@ -1,1 +1,10 @@
-
+<mat-chip-set aria-label="Favorites">
+  @for (favorite of list(); track favorite.id) {
+    <mat-chip (click)="loadDetail(favorite)">
+      {{ favorite.name }}
+      <button matChipRemove (click)="removeFavorite(favorite.id)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  }
+</mat-chip-set>

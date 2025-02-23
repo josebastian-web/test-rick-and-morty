@@ -1,6 +1,12 @@
-<mat-form-field class="form-field">
-  <mat-label>Search</mat-label>
-  <input matInput type="text" [(ngModel)]="searchField">
+<mat-form-field appearance="outline" class="form-field">
+  <mat-label>Search by {{ filterText() }}</mat-label>
+  <input
+    #txtSearch
+    matInput
+    type="text"
+    [(ngModel)]="searchField"
+    (input)="sendNewValue(txtSearch.value)"
+  >
   @if (searchField()) {
     <button matSuffix mat-icon-button aria-label="Clear" (click)="clearField()">
       <mat-icon>close</mat-icon>

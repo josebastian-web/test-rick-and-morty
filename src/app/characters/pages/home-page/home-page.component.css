@@ -5,6 +5,7 @@
   justify-content: normal;
   align-items: normal;
   align-content: normal;
+  padding: 16px;
 }
 
 .table {
@@ -14,7 +15,7 @@
   flex-basis: auto;
   align-self: auto;
   order: 0;
-  width: 70%;
+  width: 100%;
   margin: 5px;
 }
 
@@ -25,8 +26,47 @@
   flex-basis: auto;
   align-self: auto;
   order: 0;
-  width: 30%;
+  width: 400px;
   margin: 5px;
+}
+
+.search {
+  margin-left: 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  margin-bottom: 24px;
+  height: auto;
+  background: #171829;
+  color: #96a2b4;
+}
+
+.list-favorite {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title-app {
+  font-size: 26px;
+  font-weight: 500;
+  width: 50%;
+  padding-left: 16px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.card-search {
+  background: #ffffff;
+  margin-bottom: 16px;
 }
 
 

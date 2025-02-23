@@ -1,17 +1,48 @@
+<div class="header">
+  <span class="title-app">Rick and Morty App</span>
+  <div class="list-favorite">
+    <span class="title">Favorite:</span>
+    <characters-favorite
+      [list]="listFavorite()"
+      (idRemove)="removeFavorite($event)"
+      (character)="showDetail($event)"
+    />
+  </div>
+</div>
 <div class="home">
   <div class="table">
-    <characters-search></characters-search>
+    <mat-card class="mat-elevation-z4 card-search">
+      <mat-card-content>
+        <characters-search
+          (searchBy)="searchByName($event)"
+          filterText="Name"
+          class="search"
+        />
+        <characters-search
+          (searchBy)="searchBySpecies($event)"
+          filterText="Species"
+          class="search"
+        />
+      </mat-card-content>
+    </mat-card>
     <characters-table
+      style="position: relative;"
       [isLoading]="isLoading()"
       [list]="charactersList()"
       [errorMessage]="isError()"
-    ></characters-table>
-    <characters-pagination
-      [currentPage]="currentPage()"
-      [totalPages]="totalPages()"
-      (changePage)="onPageChange($event)"
-    ></characters-pagination>
+      (detail)="showDetail($event)"
+      (addToFavorite)="addToFavorite($event)"
+    >
+      <characters-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        [isLoading]="isLoading()"
+        (changePage)="onPageChange($event)"
+      />
+    </characters-table>
   </div>
-  <characters-detail class="detail"></characters-detail>
+  @if (detailCharacter()) {
+    <characters-detail [character]="detailCharacter()" class="detail" />
+  }
 </div>
 

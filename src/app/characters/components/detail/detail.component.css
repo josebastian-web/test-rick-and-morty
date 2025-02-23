@@ -1,7 +1,41 @@
 .card {
-  width: 100%;
+  width: 400px;
+  margin-top: 124px;
+  background: #ffffff;
 }
 
 img {
   width: 400px;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.details > .detail {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.detail > .title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar img {
+  width: 100px;
+  height: 100px;
+}
+
+.avatar .description {
+  margin-left: 16px;
 }
