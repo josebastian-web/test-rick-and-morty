@@ -51,4 +51,15 @@ export class CharactersService {
     );
   }
 
+  getAllCharacter(searchName: string, searchSpecies: string): Observable<Characters> {
+    return this.http.get<Characters>(
+      `${this.baseUrl}/character/?name=${searchName}&species=${searchSpecies}`
+    )
+    .pipe(
+      catchError(error => {
+        return throwError(() => new Error('No se encontro la información solicitada'))
+      })
+    );
+  }
+
 }

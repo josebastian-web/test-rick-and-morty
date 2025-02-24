@@ -11,7 +11,7 @@
 </div>
 <div class="home">
   <div class="table">
-    <mat-card class="mat-elevation-z4 card-search">
+    <mat-card class="mat-elevation-z4 card">
       <mat-card-content>
         <characters-search
           (searchBy)="searchByName($event)"
@@ -40,9 +40,18 @@
         (changePage)="onPageChange($event)"
       />
     </characters-table>
+    @if(!isLoadingAll()) {
+      <mat-card class="mat-elevation-z4 card summary-card">
+        <mat-card-content class="summary-list">
+          <app-summary title="Total species" [info]="totalSpecies()"/>
+          <app-summary title="Total type" [info]="totalType()"/>
+        </mat-card-content>
+      </mat-card>
+    }
   </div>
   @if (detailCharacter()) {
     <characters-detail [character]="detailCharacter()" class="detail" />
   }
+
 </div>
 

@@ -52,7 +52,12 @@ export class DetailComponent implements OnChanges {
         this.loadingLocation.set(false);
         this.location.set(location)
         if (location.residents.length > 0) {
-          this.loadResident(location.residents[0], 'location');
+          // Para mostrar uno diferente, que generalemente es el mismo
+          if (location.residents.length > 2) {
+            this.loadResident(location.residents[1], 'location');
+          } else {
+            this.loadResident(location.residents[0], 'location');
+          }
         }
       },
       error: ( err ) => {
@@ -71,7 +76,12 @@ export class DetailComponent implements OnChanges {
         this.loadingOrigin.set(false);
         this.origin.set(origin)
         if (origin.residents.length > 0) {
-          this.loadResident(origin.residents[0], 'origin');
+          // Para mostrar uno diferente, que generalemente es el mismo
+          if (origin.residents.length > 2) {
+            this.loadResident(origin.residents[1], 'origin');
+          } else {
+            this.loadResident(origin.residents[0], 'origin');
+          }
         }
       },
       error: ( err ) => {
